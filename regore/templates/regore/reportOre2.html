@@ -1,0 +1,40 @@
+{% extends "regore/base.html" %}
+{% block extrahead %}
+	<script src="/admin/jsi18n/" type="text/javascript"></script>
+	{{ form.media|safe }}
+	
+{% endblock %}
+{% block title %}REPORT {{user.nome_cognome}} {% endblock %}
+{% block content %}
+
+<h2>{{ user }}</h2>
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+<table>
+{% for ore in selezione %}
+    {% ifchanged ore.progetto %}
+		<tr>
+		<td>{{ore.progetto}}</td>
+		<td>{{ore.data}}</td>
+		<td>{{ore.ora_inizio}}</td>
+		<td>{{ore.ora_fine}}</td>
+		<td>{{ore.totale}}</td>
+		</tr>
+	{% else %}
+		<tr>
+		<td></td>		
+		<td>{{ore.data}}</td>
+		<td>{{ore.ora_inizio}}</td>
+		<td>{{ore.ora_fine}}</td>
+		<td>{{ore.totale}}</td>
+		</tr>
+	{% endifchanged %}
+		
+{% endfor %}
+
+</table>
+{% endblock content %}
+{% block content2 %}
+<a href="{% url 'export_csv' %}">Download CSV</a>
+{% endblock content2 %}

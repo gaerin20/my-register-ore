@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Autore {{autore.nome_cognome}} {% endblock %}
+{% block content %}
+
+<h2>{{ user }}</h2>
+{% if error %}
+<p>ERRORE:{{ error }}</p>
+{% endif %}
+
+<form action='.' method="POST">
+{{ form.as_p }}
+<input type="submit" value="Submit" />
+</form> 
+
+{% endblock content %}

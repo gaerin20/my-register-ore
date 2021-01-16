@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+	<head>
+		<title>Gae's blog</title>
+	</head>
+	<body>
+		<div>
+			<h1><a href="/">Il blog del mio sito</a></h1>
+		</div>
+		
+{% for post in posts %}
+		<div>
+		 	<p>published: 04.02.2021, 15:04</p>
+		 	<h2><a href= "">{{post.title}}</a></h2>
+		 	<p>{{post.text|linebreaksbr}}</p>
+		</div>
+{% endfor %}
+	</body>
+</html>

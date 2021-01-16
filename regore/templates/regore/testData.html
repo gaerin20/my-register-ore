@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block extrahead %}
+	
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	
+	<script> $(document).ready(function () {
+     $("#id-data").datepicker({ dateFormat: 'dd/mm/yy'}); });</script>
+{% endblock %}
+{% block title %}TestData {% endblock %}
+{% block content %}
+<p>Date: <input type="text" id="id-data"></p>
+
+<p>Date2(non funziona con firefox): <input type="date"></p>
+
+<p>Date3(unisce 1 e 2 ): <input type="date" id="id-data"></p>
+{% endblock content %}
+{% block content2 %}
+{% endblock content2 %}
