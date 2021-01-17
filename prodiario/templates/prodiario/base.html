@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it-it">
+<head>
+	<title>{% block title %}OfficeWF{% endblock title %}</title>
+       {% block extrahead %}{% endblock %} 
+	<link href="/static/style_base.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+<div id="wrapper">
+	
+	<div id="header-wrapper">
+			<div id="logo">
+				
+			</div>
+			
+	
+	</div>
+	<div id="header">
+			<div id="menu">
+				<ul>
+					<li><a href="/addOre2">ore</a></li>
+					<li><a href="/addProgetto">nuovo progetto</a></li>
+					<li><a href="/addHistory">nuovo sviluppo</a></li>
+					<li><a href="/admin">amministra</a></li>
+				</ul>
+			</div>
+	</div>
+
+	<div id="page">
+		<div id="content">
+                               
+				{% block content %}{% endblock content %}
+		</div>
+		<div id="sidebar">
+				{% block content2 %}{% endblock content2 %}
+		</div>
+		<!-- end #sidebar -->
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page -->
+<div id="footer">
+	<p>Copyright (c) 2008 Sitename.com. All rights reserved. Design by FCT</a></p>
+</div>
+<!-- end #footer -->
+</div>
+<!-- end #wrapper -->
+</body>
+</html>

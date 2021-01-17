@@ -6,5 +6,5 @@ from django.utils import timezone
 from .models import Diario
 
 def diario_list(request):
-    diarios = Diario.object.all().order_by('progetto')
+    diarios = Diario.objects.all().order_by('progetto')
     return render(request, 'prodiario/diario_list.html', {'diarios': diarios})
