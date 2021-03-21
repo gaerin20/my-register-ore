@@ -32,10 +32,19 @@ class Progetto(models.Model):
 
 
 class Diario(models.Model):
+        DIARIO_TIPO = [
+                ('co','consegna'),
+                ('em','email'),
+                ('in','incontro'),
+                ('sv','sviluppo'),
+                ('ev','evento'),
+                ('no','nota'),
+                ]
         data = models.DateField()
         progetto = models.ForeignKey(Progetto,on_delete=models.CASCADE,)
         testo = models.TextField()
-        tipo = models.CharField(max_length=100)
+        link= models.URLField(blank=True,)
+        tipo = models.CharField(max_length=100,choices=DIARIO_TIPO)
         firma = models.ForeignKey(Collaboratore,on_delete=models.CASCADE,)
         def __str__(self):
                 return u"%s %s" %(self.data, self.progetto)

@@ -1,0 +1,71 @@
+{% extends "prodiario/base.html" %}
+{% load static %}
+{% block extrahead %}
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script> 
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script> $(document).ready(function () {
+     	 $("#id-data").datepicker({ dateFormat: 'yy-mm-dd'}); });</script>       
+{% endblock %}
+{% block title %}DIARIO{% endblock %}
+{% block content %}
+
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+<form action="{% url 'diario' %}" method="POST">
+<table id="blocco-inserimento">
+<caption><h2>INSERISCI EVENTO</h2></caption>
+<tr>
+<td><h2>{{form.progetto}}</h2></td>
+<td>{{form.data}}</td>
+</tr>
+<tr>
+<td colspan =2>{{form.testo}}</td>
+</tr>
+<tr>
+<td colspan =2>{{form.link}}</td>
+</tr>
+<tr>
+<td>{{form.tipo}}</td>
+<td>{{form.firma}}</td>
+</tr>
+</table>
+<input type="submit" value="Submit" />
+
+<dl >
+
+<table id="secondblock">
+<caption><h2>{{selezione.progetto}}</h2></caption>
+    
+    		<tr>
+		<td>{{selezione.data}}</td>
+		<td>{{selezione.testo}}</td>
+		<td>{{selezione.tipo}}</td>
+		<td>{{selezione.firma}}</td>
+		</tr>
+	
+	
+		
+</table>
+<p>{{ user }}</p>
+</dl>
+
+
+
+{% endblock content %}
+{% block content2 %}
+{% endblock content2 %}

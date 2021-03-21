@@ -1,0 +1,274 @@
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+
+body {
+	margin: 0;
+	padding: 50px 0 0 0;
+	background: #000000 url(images/img03.jpg) repeat-x left top;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #649632;
+}
+
+h1, h2, h3 {
+	margin: 0;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	color: #649632;
+}
+
+h1 { font-size: 44px; }
+
+h2 { font-size: 26px; }
+
+h3 { }
+
+p, ul, ol {
+	margin-top: 0;
+	line-height: 240%;
+	text-align: justify;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+caption {
+ text-align: left;
+ }
+ul, ol { }
+
+blockquote { }
+
+a { color: #000000; }
+
+a:hover { text-decoration: none; }
+
+a img {
+	border: none;
+}
+
+img.left {
+	float: left;
+	margin: 7px 30px 0 0;
+}
+
+img.right {
+	float: right;
+	margin: 7px 0 0 30px;
+}
+
+hr { display: none; }
+
+.list1 {
+}
+
+.list1 li {
+	float: left;
+	line-height: normal;
+}
+
+.list1 li img {
+	margin: 0 30px 30px 0;
+}
+
+.list1 li.alt img {
+	margin-right: 0;
+}
+
+#wrapper {
+	background: url(images/img06.jpg) repeat-x left bottom;
+}
+
+/* Header */
+
+#header-wrapper {
+	width: 880px;
+	height: 147px;
+	margin: 0 auto;
+	border-left: 0px solid #FFFFFF;
+	border-right: 0px solid #FFFFFF;
+	border-top: 0px solid #FFFFFF;
+}
+
+#header {
+	width: 884px;
+	height: 50px;
+	margin: 0 auto;
+	background: #333333 url(images/img02_1.jpg) no-repeat left top;
+}
+
+/* Menu */
+
+#menu {
+	float: left;
+	width: 540px;
+	height: 51px;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 10px 0 0 10px;
+	list-style: none;
+	line-height: normal;
+}
+
+#menu li {
+	display: block;
+	float: left;
+}
+
+#menu a {
+	display: block;
+	float: left;
+	margin-right: 17px;
+	padding: 5px 12px;
+	text-decoration: none;
+	font: 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+}
+
+#menu a:hover { text-decoration: underline; }
+
+#menu .current_page_item a {
+	color: #FFFFFF;
+}
+
+/* Search */
+
+#search {
+	float: right;
+	width: 305px;
+	height: 76px;
+}
+
+#search form {
+	float: right;
+	margin: 0;
+	padding: 30px 20px 0 0;
+}
+
+#search fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#search input {
+	float: left;
+	font: 12px Georgia, "Times New Roman", Times, serif;
+	border: none;
+}
+
+#search-text {
+	width: 135px;
+	height: 18px;
+	padding: 3px 0 0 5px;
+	background: #ECF9E4;
+	color: #658453;
+}
+
+#search-submit {
+	height: 21px;
+	margin-left: 12px;
+	color: #39561D;
+}
+
+/* Page */
+
+#page {
+	width: 840px;
+	margin: 0 auto;
+	padding: 30px 20px 0px 20px;
+	background: #FFFFFF;
+	border-left: 2px solid #FFFFFF;
+	border-right: 2px solid #FFFFFF;
+	border-bottom: 2px solid #FFFFFF;
+}
+
+/** LOGO */
+
+#logo {
+	height: 200px;
+	background: url(images/nome.jpg) no-repeat left top;
+	background-size:880px 147px;
+	padding: 25px 0 0 20px;
+}
+
+#logo h1, #logo p {
+	float: left;
+	margin: 0;
+	padding: 0 0 0 20px;
+	line-height: normal;
+}
+
+#logo h1 { padding-top: 140px; }
+
+#logo h1 a {
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #FFFFFF;
+}
+
+#logo h1 a:hover { text-decoration: underline; }
+
+#logo p {
+	padding: 165px 0 0 15px;
+	font: italic 13px Georgia, "Times New Roman", Times, serif;
+	color: #B6ACA2;
+}
+
+#logo p a {
+	text-decoration: none;
+	color: #B6ACA2;
+}
+
+#logo p a:hover { text-decoration: underline; }
+
+/* Content */
+
+#content {
+	float: left;
+	width: 100%;
+}
+
+#secondblock table, tr, td{
+	color: #006000;
+	table-layout: fixed;
+	width: 100%;
+	
+	border-collapse: collapse;
+	border: 1px solid #FFFFFF;
+
+}
+#blocco-inserimento table, tr {
+	table-layout: fixed;
+	width: 100%;
+	
+	border-collapse: collapse;
+	border: 1px solid #FFFFFF;
+
+}
+/* Footer */
+
+#footer {
+	width: 880px;
+	margin: 0 auto;
+	padding: 0;
+	background: #494336 url(images/img05.jpg) no-repeat left top;
+	border-left: 2px solid #FFFFFF;
+	border-right: 2px solid #FFFFFF;
+	border-bottom: 2px solid #FFFFFF;
+}
+
+#footer p {
+	margin: 0;
+	padding: 20px 0;
+	text-align: center;
+	line-height: normal;
+	color: #B5ADA5;
+}
+
+#footer a {
+	color: #B5ADA5;
+}

@@ -1,0 +1,24 @@
+{% extends "regore/base.html" %}
+{% block extrahead %}
+	
+		{{ form.media|safe }}
+	
+{% endblock %}
+{% block title %}TEST {{user.nome_cognome}} {% endblock %}
+{% block content %}
+
+<h2>{{ user }}</h2>
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+{% for diario in diarios %}
+	<dt>"{{diario.data}}"</dt>
+	<dd>"{{diario.progetto}}"</dd>
+	<dd>"{{diario.testo}}"</dd>
+	<dd>"{{diario.tipo}}"</dd>
+	<dd>"{{diario.firma}}"</dd>
+{% endfor %} 
+
+{% endblock content %}
+{% block content2 %}
+{% endblock content2 %}

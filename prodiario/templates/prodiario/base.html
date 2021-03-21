@@ -3,7 +3,7 @@
 <head>
 	<title>{% block title %}OfficeWF{% endblock title %}</title>
        {% block extrahead %}{% endblock %} 
-	<link href="/static/style_base.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/static/style_diario.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
 <div id="wrapper">
@@ -18,9 +18,8 @@
 	<div id="header">
 			<div id="menu">
 				<ul>
-					<li><a href="/addOre2">ore</a></li>
-					<li><a href="/addProgetto">nuovo progetto</a></li>
-					<li><a href="/addHistory">nuovo sviluppo</a></li>
+					<li><a href="/diario">aggiungi evento</a></li>
+					<li><a href="/eventi">lista eventi</a></li>
 					<li><a href="/admin">amministra</a></li>
 				</ul>
 			</div>
@@ -31,10 +30,7 @@
                                
 				{% block content %}{% endblock content %}
 		</div>
-		<div id="sidebar">
-				{% block content2 %}{% endblock content2 %}
-		</div>
-		<!-- end #sidebar -->
+		
 		<div style="clear: both;">&nbsp;</div>
 	</div>
 	<!-- end #page -->

@@ -17,11 +17,19 @@
 	</div>
 	<div id="header">
 			<div id="menu">
+				
+				{% if user.is_authenticated %}
+					<h1>{{ user.get_username }}</h1>
+				{% endif %}
 				<ul>
+				<!--<li><a href="{% url 'logout' %}?next={{request.path}}">Logut</a></li> -->
 					<li><a href="/addOre2">ore</a></li>
 					<li><a href="/addProgetto">nuovo progetto</a></li>
 					<li><a href="/addHistory">nuovo sviluppo</a></li>
 					<li><a href="/admin">amministra</a></li>
+				<!--
+					<li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li> -->
+				
 				</ul>
 			</div>
 	</div>

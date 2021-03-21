@@ -1,5 +1,5 @@
-{% extends "prodiario/base.html" %} 
 {% load static %}
+ 
 {% block extrahead %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <link href="/static/style_diario_list.css" rel="stylesheet" type="text/css" media="screen" />	
@@ -23,25 +23,25 @@
 	{% if error %}
 	<p>{{ error }}</p>
 	{% endif %}
-
-<hr></hr>
-<hr></hr>
-<div class="title"><h3>{{progetto}}</h3></div>
-
-<table class="div-table">
-
-{% for diario in diarios %}
-<tr>
-	<th>{{diario.data}}</th>
-	<th>{{diario.tipo}}</th>
-	<th>{{diario.firma.cognome}}</th>
-</tr>
-<tr>	
-	<td colspan=3><p>{{diario.testo}}</p><p><a href={{diario.link}}>{{diario.link}}</a></p></td>
-</tr>
-{% endfor %} 
-
-</table>
 {% endblock content %}	
+
 {% block content2 %}
+<hr id="linea-separazione"> </hr>
+<h3>{{progetto}}</h3>
+<div class="div-table">
+	
+{% for diario in diarios %}
+<div class="div-table-row">
+	<div class="div-table-col-data">{{diario.data}}</div>
+	<div class="div-table-col-testo">{{diario.testo}}</div>
+	<div class="div-table-col-tipo">{{diario.tipo}}</div>
+	</div>
+<div class="div-table-row">
+	<div class="div-table-col-data"></div>
+	<div class="div-table-col-link">{{diario.link}}</div>
+	<div class="div-table-col-firma">{{diario.firma}}</div>
+	</div>
+{% endfor %} 
+</div>
+
 {% endblock content2 %}

@@ -109,8 +109,30 @@ def reportOreND(request):
                 progetto_selezionato = post['progetto']
                 data_da = post['data']
                 f= ReportOreForm()
-                sz = Ore.objects.filter(progetto = progetto_selezionato, data__gte = data_da)
-                return render_to_response('regore/reportOreND.html',{'form':f,'selezione':sz,  })
+                #la QuerySet sotto purtroppo non funziona perchè ora_fine - ora_inizio tralascia il computo dei minuti
+                #sz = Ore.objects.filter(progetto = progetto_selezionato, data__gte = data_da).extra(select={'totale':"ora_fine - ora_inizio"})
+                sz = Ore.objects.filter(progetto = progetto_selezionato, data__gte = data_da).order_by('data')
+                #inizializzo una nuova tupla
+                sz_t=[]
+                for obj in sz:
+                        dt0=obj.ora_inizio
+                        dt1=obj.ora_fine
+                        #trasformo le datetime.time in minuti e calcolo la durata
+                        durata=(dt1.hour*60+dt1.minute)-(dt0.hour*60+dt0.minute)
+                        #creo un nuovo oggetto datetime.time a partire dai minuti della durata usando il costruttore: datetime.time(H, m)
+                        delta_dt=datetime.time(int(durata/60),durata%60)
+                        #inizializzo un nuovo dizionario
+                        obj1={}
+                        #aggiungo i valori
+                        obj1['data']=obj.data
+                        obj1['progetto']=obj.progetto
+                        obj1['ora_inizio']=obj.ora_inizio
+                        obj1['ora_fine']=obj.ora_fine
+                        obj1['totale']=delta_dt
+                        obj1['note']=obj.note
+                        #aggiungo il dizionario alla tupla che poi trasmetterò al template
+                        sz_t.append(obj1)
+                return render_to_response('regore/reportOreND.html',{'form':f,'selezione':sz_t,  })
         else:
                 f = ReportOreForm()
                 return render_to_response('regore/reportOreND.html',{'form':f,})
