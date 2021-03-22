@@ -27,7 +27,7 @@ def diario_list(request):
             progetto_selezionato = f.cleaned_data['progetto']
             data_da = post['data']
             tipo = post['tipo']
-            firma = post['firma']
+            #firma = post['firma']
             sz= Diario.objects.filter(progetto = progetto_selezionato).order_by('data')
             progetto=sz[0].progetto
             if tipo:
