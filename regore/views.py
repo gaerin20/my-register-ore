@@ -4,27 +4,24 @@ from django.shortcuts import render
 # Create your views here.
 # -*- coding: utf-8 -*-
 import datetime
-from django.http import HttpRequest,HttpResponse, Http404, HttpResponseRedirect
 from .models import *
 from .formulari import *
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
 from django.forms import ModelForm
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.template import Context, loader
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.http import HttpResponse,  HttpResponseNotModified
-from django.http import HttpResponseBadRequest
 from django.utils.encoding import smart_str
 from django.utils import timezone
 import csv
 
 
 @csrf_exempt
-#@login_required()
+@login_required()
 def addOre(request):
         #note = None
         #sz = Ore.objects.filter(data__gte = (timezone.now() - timezone.timedelta(days=7)))
@@ -55,7 +52,7 @@ def addOre(request):
                 form = InsertOreForm()
         else:
                 form = InsertOreForm()
-        return render_to_response('regore/addOre.html',{'form':form,'selezione':sz,  })
+        return render(request,'regore/addOre.html',{'form':form,'selezione':sz,  })
 @csrf_exempt
 #@login_required()
 def reportOre(request):
@@ -94,7 +91,7 @@ def export_csv(request):
         return response
 @csrf_exempt
 def testData(request):
-        return render_to_response('regore/testData.html',{})
+        return render(request, 'regore/testData.html',{})
 @csrf_exempt
 def reportOreND(request):
         filename = "oreND.csv"
@@ -132,7 +129,7 @@ def reportOreND(request):
                         obj1['note']=obj.note
                         #aggiungo il dizionario alla tupla che poi trasmetterò al template
                         sz_t.append(obj1)
-                return render_to_response('regore/reportOreND.html',{'form':f,'selezione':sz_t,  })
+                return render_to_response('regore/reportOreND_List.html',{'form':f,'selezione':sz_t,  })
         else:
                 f = ReportOreForm()
-                return render_to_response('regore/reportOreND.html',{'form':f,})
+                return render_to_response('regore/reportOreND_Form.html',{'form':f,})

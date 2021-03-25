@@ -1,5 +1,5 @@
+{% extends "prodiario/base.html" %} 
 {% load static %}
- 
 {% block extrahead %}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <link href="/static/style_diario_list.css" rel="stylesheet" type="text/css" media="screen" />	
@@ -13,7 +13,7 @@
 	
 	
 {% endblock %}
-{% block title %}<div class="title"><h3>DIARIO DI UFFICIO</h3></div>{% endblock %}
+{% block title %}<div class="title"><h3>Cerca eventi progetto</h3></div>{% endblock %}
 {% block content %}
 <form action="{% url 'diario-list' %}" method="POST">
 <div id="insTable">{{form}}<input type="submit" value="Ok" /></div>
@@ -23,25 +23,10 @@
 	{% if error %}
 	<p>{{ error }}</p>
 	{% endif %}
+
+<hr></hr>
+<hr></hr>
+
 {% endblock content %}	
-
 {% block content2 %}
-<hr id="linea-separazione"> </hr>
-<h3>{{progetto}}</h3>
-<div class="div-table">
-	
-{% for diario in diarios %}
-<div class="div-table-row">
-	<div class="div-table-col-data">{{diario.data}}</div>
-	<div class="div-table-col-testo">{{diario.testo}}</div>
-	<div class="div-table-col-tipo">{{diario.tipo}}</div>
-	</div>
-<div class="div-table-row">
-	<div class="div-table-col-data"></div>
-	<div class="div-table-col-link">{{diario.link}}</div>
-	<div class="div-table-col-firma">{{diario.firma}}</div>
-	</div>
-{% endfor %} 
-</div>
-
 {% endblock content2 %}

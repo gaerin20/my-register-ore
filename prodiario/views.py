@@ -36,9 +36,9 @@ def diario_list(request):
             f = CercaDiarioForm2()
         
                #sz= Diario.objects.filter(progetto = progetto_selezionato, data__gte = data_da,tipo = tipo, firma = firma).order_by('data')
-            return render(request, 'prodiario/diario_list.html', {'form':f, 'diarios': sz, 'progetto':progetto})
+            return render(request, 'prodiario/diario_list.html', {'diarios': sz, 'progetto':progetto})
     f = CercaDiarioForm2()
-    return render(request, 'prodiario/diario_list.html', {'form':f,})
+    return render(request, 'prodiario/diario_search.html', {'form':f,})
 
 @csrf_exempt
 def addDiario(request):

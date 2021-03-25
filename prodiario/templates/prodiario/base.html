@@ -18,8 +18,10 @@
 	<div id="header">
 			<div id="menu">
 				<ul>
-					<li><a href="/diario">aggiungi evento</a></li>
-					<li><a href="/eventi">lista eventi</a></li>
+					<li><a href="/addOre">inserisci ore</a></li>
+					<li><a href="/reportOreND">lista ore</a></li>
+					<li><a href="/prodiario">inserisci evento</a></li>
+					<li><a href="/prodiarioList">lista eventi</a></li>
 					<li><a href="/admin">amministra</a></li>
 				</ul>
 			</div>
@@ -27,7 +29,7 @@
 
 	<div id="page">
 		<div id="content">
-                               
+            {user}                   
 				{% block content %}{% endblock content %}
 		</div>
 		
