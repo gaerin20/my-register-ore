@@ -29,17 +29,15 @@ class Committente(models.Model):
 		verbose_name_plural = "Committenti"
 
 class Progetto(models.Model):
-	anno = models.DateField("%Y")
-	nome = models.CharField(max_length=200)
-	luogo = models.CharField(max_length=100)
-	committente = models.ForeignKey(Committente,on_delete=models.CASCADE,)
-        
-	def __str__(self):
-		return self.nome
-	class Meta:
-		verbose_name_plural = "Progetti"
-
-	
+        anno = models.DateField("%Y")
+        nome = models.CharField(max_length=200)
+        luogo = models.CharField(max_length=100)
+        committente = models.ForeignKey(Committente,on_delete=models.CASCADE,)
+        archivio = models.BooleanField(default = False, null = True, blank = True,)
+        def __str__(self):
+                return self.nome
+        class Meta:
+                verbose_name_plural = "Progetti"
 
 class Preventivo(models.Model):
 	progetto = models.ForeignKey(Progetto,on_delete=models.CASCADE,)
@@ -68,6 +66,7 @@ class Ore(models.Model):
 	ora_inizio = models.TimeField()
 	ora_fine = models.TimeField()
 	note = models.TextField()
+	collaboratore = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE,)
 	def __str__(self):
 		return u"%s %s" %(self.data, self.progetto)
 	class Meta:

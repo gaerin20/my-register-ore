@@ -49,9 +49,9 @@ def addOre(request):
                 sz=Ore.objects.latest('data','ora_fine')
                 #post = request.POST
                 #form = InsertOreForm({'progetto':post['progetto'], 'data':post['data']})
-                form = InsertOreForm()
+                form = InsertOreForm(initial={'collaboratore':request.user})
         else:
-                form = InsertOreForm()
+                form = InsertOreForm(initial={'collaboratore':request.user})
         return render(request,'regore/addOre.html',{'form':form,'selezione':sz,  })
 @csrf_exempt
 #@login_required()
@@ -105,10 +105,11 @@ def reportOreND(request):
                 post = request.POST
                 progetto_selezionato = post['progetto']
                 data_da = post['data']
+                current_collaboratore= request.user;
                 f= ReportOreForm()
                 #la QuerySet sotto purtroppo non funziona perchè ora_fine - ora_inizio tralascia il computo dei minuti
                 #sz = Ore.objects.filter(progetto = progetto_selezionato, data__gte = data_da).extra(select={'totale':"ora_fine - ora_inizio"})
-                sz = Ore.objects.filter(progetto = progetto_selezionato, data__gte = data_da).order_by('data')
+                sz = Ore.objects.filter(progetto = progetto_selezionato, collaboratore = current_collaboratore, data__gte = data_da).order_by('data')
                 #inizializzo una nuova tupla
                 sz_t=[]
                 for obj in sz:

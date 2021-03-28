@@ -63,7 +63,8 @@ def addDiario(request):
             error = u'form is invalid'
             return errorHandle(error)
         diarios=Diario.objects.latest('id')
-        form = InsertDiarioForm()
+        form = InsertDiarioForm(initial={'firma':request.user})
+       
     else:
-        form = InsertDiarioForm()
+        form = InsertDiarioForm(initial={'firma':request.user})
     return render(request, 'prodiario/addDiario.html',{'form': form,'selezione': diarios,  })

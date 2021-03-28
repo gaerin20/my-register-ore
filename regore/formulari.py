@@ -17,11 +17,12 @@ from datetime import date
 class InsertOreForm(ModelForm):
 	class Meta:
 		model = Ore
-		fields = ('progetto','data','ora_inizio','ora_fine','note')
+		fields = ('progetto','data','ora_inizio','ora_fine','note','collaboratore')
 		widgets = {
 			'data': forms.DateInput(attrs={'id':'id-data'}),
                         'ora_inizio': forms.TimeInput(),
 		}
+		
 class ReportOreForm(ModelForm):
 	class Meta:
 		model = Ore

@@ -15,7 +15,7 @@ body {
 
 h1, h2, h3 {
 	margin: 0;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: Georgia, "Times New Roman", Times, serif;
 	font-weight: normal;
 	color: #649632;
 }
@@ -100,12 +100,13 @@ hr { display: none; }
 
 #menu {
 	float: left;
+	width: ;
 	height: 51px;
 }
 
 #menu ul {
 	margin: 0;
-	padding: 8px 0 0 8px;
+	padding: 10px 0 0 10px;
 	list-style: none;
 	line-height: normal;
 }
@@ -125,13 +126,52 @@ hr { display: none; }
 	color: #FFFFFF;
 }
 
-/*#menu a:hover { text-decoration: underline; }
+#menu a:hover { text-decoration: underline; }
 
 #menu .current_page_item a {
 	color: #FFFFFF;
 }
 
-*/
+/* Search */
+
+#search {
+	float: right;
+	width: 305px;
+	height: 76px;
+}
+
+#search form {
+	float: right;
+	margin: 0;
+	padding: 30px 20px 0 0;
+}
+
+#search fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#search input {
+	float: left;
+	font: 12px Georgia, "Times New Roman", Times, serif;
+	border: none;
+}
+
+#search-text {
+	width: 135px;
+	height: 18px;
+	padding: 3px 0 0 5px;
+	background: #ECF9E4;
+	color: #658453;
+}
+
+#search-submit {
+	height: 21px;
+	margin-left: 12px;
+	color: #39561D;
+}
+
 /* Page */
 
 #page {
@@ -143,9 +183,9 @@ hr { display: none; }
 	border-right: 2px solid #FFFFFF;
 	border-bottom: 2px solid #FFFFFF;
 }
-/*#ore td {
+#ore td {
 	padding: 5px 10px 5px 10px;
-}*/
+}
 /** LOGO */
 
 #logo {
@@ -285,8 +325,10 @@ hr { display: none; }
 	line-height: 200%;
 }
 #secondblock {
-	color: #8b8b83;
+	color: #FF0000;
+/* Calendar */
 
+#calendar {
 }
 
 #calendar caption {
@@ -431,3 +473,23 @@ hr { display: none; }
 {
     background-position: 0 -16px;
 }
+/* webkit adjacent element selector bugfix */
+@media screen and (-webkit-min-device-pixel-ratio:0)
+{
+    .css-treeview
+    {
+        -webkit-animation: webkit-adjacent-element-selector-bugfix infinite 1s;
+    }
+ 
+    @-webkit-keyframes webkit-adjacent-element-selector-bugfix
+    {
+        from
+        {
+            padding: 0;
+        }
+        to
+        {
+            padding: 0;
+        }
+    }
+}  
