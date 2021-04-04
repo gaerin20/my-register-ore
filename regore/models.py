@@ -34,6 +34,7 @@ class Progetto(models.Model):
         luogo = models.CharField(max_length=100)
         committente = models.ForeignKey(Committente,on_delete=models.CASCADE,)
         archivio = models.BooleanField(default = False, null = True, blank = True,)
+        privato = models.BooleanField(default = False, null = True, blank = True,)
         def __str__(self):
                 return self.nome
         class Meta:

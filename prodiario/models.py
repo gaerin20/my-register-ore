@@ -19,12 +19,13 @@ class Collaboratore(models.Model):
         class Meta:
                 verbose_name_plural = "Collaboratore"
 
-
 class Progetto(models.Model):
 	anno = models.DateField("%Y")
 	nome = models.CharField(max_length=200)
 	luogo = models.CharField(max_length=100)
-	protocollo = models.CharField(max_length=6)        
+	protocollo = models.CharField(max_length=6)
+	archivio = models.BooleanField(default = False, null = True, blank = True,)
+	privato = models.BooleanField(default = False, null = True, blank = True,)
 	def __str__(self):
 		return u"%s %s" %(self.protocollo, self.nome)
 	class Meta:

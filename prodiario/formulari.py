@@ -50,6 +50,7 @@ class CercaDiarioForm2(forms.Form):
        #formo lista progetti
        qs_pro=Progetto.objects.all()  #per avere una lista progetti da cui sceglere
        LISTA_PROGETTI=[]
+       
        for obj in qs_pro:
                LISTA_PROGETTI.append((obj.id,obj))  #obj.id , obj perchè la lista Choices eve essere una lista di coppie key, value
        #analogamente formo lista dei collaboratori      
