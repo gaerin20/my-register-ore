@@ -9,17 +9,9 @@ from django.forms import ModelForm
 from django.forms.widgets import DateTimeInput
 from django.contrib.admin import widgets
 from datetime import date
-
+from regore.models import Progetto
 # Tipi base.
-class Collaboratore(models.Model):
-        nome = models.CharField(max_length=20)
-        cognome = models.CharField(max_length=20)
-        def __str__(self):
-                return u"%s %s" %(self.nome, self.cognome)
-        class Meta:
-                verbose_name_plural = "Collaboratore"
-
-class Progetto(models.Model):
+class Progetto_00(models.Model):
 	anno = models.DateField("%Y")
 	nome = models.CharField(max_length=200)
 	luogo = models.CharField(max_length=100)
@@ -42,13 +34,14 @@ class Diario(models.Model):
                 ('no','nota'),
                 ]
         data = models.DateField()
-        progetto = models.ForeignKey(Progetto,on_delete=models.CASCADE,)
+        progetto_00 = models.ForeignKey(Progetto_00,null=True,blank=True, on_delete=models.CASCADE,)
+        progetto_01=models.ForeignKey(Progetto,null=True,blank=True,on_delete=models.CASCADE,)
         testo = models.TextField()
         link= models.URLField(blank=True,)
         tipo = models.CharField(max_length=100,choices=DIARIO_TIPO)
         firma = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE,)
         def __str__(self):
-                return u"%s %s" %(self.data, self.progetto)
+                return u"%s %s" %(self.data, self.progetto_01)
         class Meta:
                 verbose_name_plural = "Diario"
 

@@ -32,6 +32,7 @@ class Progetto(models.Model):
         anno = models.DateField("%Y")
         nome = models.CharField(max_length=200)
         luogo = models.CharField(max_length=100)
+        protocollo = models.CharField(max_length=6, default = 00000, null = True, blank = True,)
         committente = models.ForeignKey(Committente,on_delete=models.CASCADE,)
         archivio = models.BooleanField(default = False, null = True, blank = True,)
         privato = models.BooleanField(default = False, null = True, blank = True,)

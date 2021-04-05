@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Diario
+from regore.models import Progetto
 from .formulari import InsertDiarioForm, CercaDiarioForm, CercaDiarioForm2
 
 from django.views.decorators.csrf import csrf_exempt
@@ -24,7 +25,7 @@ def diario_list(request):
         f=CercaDiarioForm2(request.POST)
         if f.is_valid():
             post = request.POST
-            progetto_selezionato = f.cleaned_data['progetto']
+            progetto_selezionato = f.cleaned_data['progetto_01']
             data_da = post['data']
             tipo = post['tipo']
             #firma = post['firma']
@@ -34,10 +35,12 @@ def diario_list(request):
                 sz= Diario.objects.filter(progetto = progetto_selezionato,tipo = tipo).order_by('data')
             
             f = CercaDiarioForm2()
+            #f.fields['progetto_01'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
         
                #sz= Diario.objects.filter(progetto = progetto_selezionato, data__gte = data_da,tipo = tipo, firma = firma).order_by('data')
             return render(request, 'prodiario/diario_list.html', {'diarios': sz, 'progetto':progetto})
     f = CercaDiarioForm2()
+    #f.fields['progetto_01'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
     return render(request, 'prodiario/diario_search.html', {'form':f,})
 
 @csrf_exempt
@@ -53,7 +56,7 @@ def addDiario(request):
         form=InsertDiarioForm(request.POST)
         if form.is_valid():
             form.cleaned_data['data']
-            form.cleaned_data['progetto']
+            form.cleaned_data['progetto_01']
             form.cleaned_data['testo']
             form.cleaned_data['link']
             form.cleaned_data['tipo']
@@ -64,7 +67,8 @@ def addDiario(request):
             return errorHandle(error)
         diarios=Diario.objects.latest('id')
         form = InsertDiarioForm(initial={'firma':request.user})
-       
+        form.fields['progetto_01'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
     else:
         form = InsertDiarioForm(initial={'firma':request.user})
+        form.fields['progetto_01'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
     return render(request, 'prodiario/addDiario.html',{'form': form,'selezione': diarios,  })

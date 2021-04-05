@@ -30,7 +30,7 @@
 <table id="blocco-inserimento">
 <caption><h2>INSERISCI EVENTO</h2></caption>
 <tr>
-<td><h2>{{form.progetto}}</h2></td>
+<td><h2>{{form.progetto_01}}</h2></td>
 <td>{{form.data}}</td>
 </tr>
 <tr>
@@ -48,19 +48,10 @@
 
 <dl >
 
-<table id="secondblock">
-<caption><h2>{{selezione.progetto}}</h2></caption>
-    
-    		<tr>
-		<td>{{selezione.data}}</td>
-		<td>{{selezione.testo}}</td>
-		<td>{{selezione.tipo}}</td>
-		<td>{{selezione.firma}}</td>
-		</tr>
-	
-	
+
+<h3>ultimo inserito: {{selezione.progetto_01}}, {{selezione.data}},{{selezione.firma}}</h3>
+ 
 		
-</table>
 <p>{{ user }}</p>
 </dl>
 

@@ -50,8 +50,10 @@ def addOre(request):
                 #post = request.POST
                 #form = InsertOreForm({'progetto':post['progetto'], 'data':post['data']})
                 form = InsertOreForm(initial={'collaboratore':request.user})
+                form.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
         else:
                 form = InsertOreForm(initial={'collaboratore':request.user})
+                form.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
         return render(request,'regore/addOre.html',{'form':form,'selezione':sz,  })
 @csrf_exempt
 #@login_required()
@@ -107,6 +109,7 @@ def reportOreND(request):
                 data_da = post['data']
                 current_collaboratore= request.user;
                 f= ReportOreForm()
+                f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
                 #la QuerySet sotto purtroppo non funziona perchè ora_fine - ora_inizio tralascia il computo dei minuti
                 #sz = Ore.objects.filter(progetto = progetto_selezionato, data__gte = data_da).extra(select={'totale':"ora_fine - ora_inizio"})
                 sz = Ore.objects.filter(progetto = progetto_selezionato, collaboratore = current_collaboratore, data__gte = data_da).order_by('data')
@@ -133,4 +136,5 @@ def reportOreND(request):
                 return render_to_response('regore/reportOreND_List.html',{'form':f,'selezione':sz_t,  })
         else:
                 f = ReportOreForm()
+                f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
                 return render_to_response('regore/reportOreND_Form.html',{'form':f,})
