@@ -1,17 +1,18 @@
-
 {% extends "regore/base.html" %}
 {% load static %}
 {% block extrahead %}
-	
+	<script type = "text/javascript">
+	  window.__admin_media_prefix__="http://www.gaerin.webfactional.com/static/admin/";
+	</script>
 	<script src="/admin/jsi18n/" type="text/javascript"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-   <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-   <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	{{ form.media|safe }}
 	<script> $(document).ready(function () {
      	 $("#id-data").datepicker({ dateFormat: 'dd/mm/yy'}); });</script>
 {% endblock %}
-{% block title %}REGISTRO ORE{% endblock %}
+{% block title %}TEST {{user.nome_cognome}} {% endblock %}
 {% block content %}
 
 
