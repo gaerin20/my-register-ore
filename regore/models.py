@@ -37,7 +37,7 @@ class Progetto(models.Model):
         archivio = models.BooleanField(default = False, null = True, blank = True,)
         privato = models.BooleanField(default = False, null = True, blank = True,)
         def __str__(self):
-                return self.nome
+                return u"%s %s" %(self.protocollo, self.nome)
         class Meta:
                 verbose_name_plural = "Progetti"
 

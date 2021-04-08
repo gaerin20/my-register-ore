@@ -29,10 +29,10 @@ def diario_list(request):
             data_da = post['data']
             tipo = post['tipo']
             #firma = post['firma']
-            sz= Diario.objects.filter(progetto = progetto_selezionato).order_by('data')
-            progetto=sz[0].progetto
+            sz= Diario.objects.filter(progetto_01 = progetto_selezionato).order_by('data')
+            progetto=sz[0].progetto_01
             if tipo:
-                sz= Diario.objects.filter(progetto = progetto_selezionato,tipo = tipo).order_by('data')
+                sz= Diario.objects.filter(progetto_01 = progetto_selezionato,tipo = tipo).order_by('data')
             
             f = CercaDiarioForm2()
             #f.fields['progetto_01'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
