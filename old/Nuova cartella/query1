@@ -1,0 +1,1 @@
+insert into regore_diario0(progetto_id,data,testo,tipo) VALUES ((SELECT progetto_01_id from prodiario_diario),(SELECT data from prodiario_diario),(SELECT testo from prodiario_diario),"co") 

@@ -73,5 +73,23 @@ class Ore(models.Model):
 		return u"%s %s" %(self.data, self.progetto)
 	class Meta:
 		verbose_name_plural = "Ore"
+
+class Diario0(models.Model):
+        DIARIO_TIPO = [
+                ('in','consegna/ricezione'),
+                ('tr','incontro/colloquio/avviso/email/posta'),
+                ('nb','sviluppo/nota/promemoria'),
+                ('td','todo/da fare'),
+                ]
+        data = models.DateField()
+        progetto = models.ForeignKey(Progetto,on_delete=models.CASCADE,null=True,blank=True,default='0')
+        testo = models.TextField()
+        link = models.URLField(blank=True, null=True,)
+        tipo = models.CharField(max_length=100,choices=DIARIO_TIPO)
+        firma = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE,)
+        def __str__(self):
+                return u"%s %s" %(self.data, self.progetto)
+        class Meta:
+                verbose_name_plural = "Diario"
 		
 # classi per form.
