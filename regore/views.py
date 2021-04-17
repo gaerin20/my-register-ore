@@ -138,3 +138,64 @@ def reportOreND(request):
                 f = ReportOreForm()
                 f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
                 return render_to_response('regore/reportOreND_Form.html',{'form':f,})
+
+#diario
+@csrf_exempt
+def diario_list(request):
+    diarios=Diario0.objects.latest('id')
+    def errorHandle(error):
+        f = CercaDiarioForm2()
+        return render_to_response( 'regore/error.html',{
+         'error' : error,
+         'form' : f,
+        })
+    if (request.method == 'POST'):
+        f=CercaDiarioForm2(request.POST)
+        if f.is_valid():
+            post = request.POST
+            progetto_selezionato = f.cleaned_data['progetto']
+            data_da = post['data']
+            tipo = post['tipo']
+            #firma = post['firma']
+            sz= Diario0.objects.filter(progetto = progetto_selezionato).order_by('data')
+            progetto=sz[0].progetto
+            if tipo:
+                sz= Diario.objects.filter(progetto = progetto_selezionato,tipo = tipo).order_by('data')
+            
+            f = CercaDiarioForm2()
+                   
+               
+            return render(request, 'regore/diario_list.html', {'diarios': sz, 'progetto':progetto})
+    f = CercaDiarioForm2()
+    
+    return render(request, 'regore/diario_search.html', {'form':f,})
+
+@csrf_exempt
+def addDiario(request):
+    diarios=Diario0.objects.latest('id')
+    def errorHandle(error):
+        form = InsertDiarioForm()
+        return render_to_response( 'regore/error.html',{
+         'error' : error,
+         'form' : form,
+        })
+    if (request.method == 'POST'):
+        form=InsertDiarioForm(request.POST)
+        if form.is_valid():
+            form.cleaned_data['data']
+            form.cleaned_data['progetto']
+            form.cleaned_data['testo']
+            form.cleaned_data['link']
+            form.cleaned_data['tipo']
+            form.cleaned_data['firma']
+            new_diario=form.save()
+        else:
+            error = u'form is invalid'
+            return errorHandle(error)
+        diarios=Diario.objects.latest('id')
+        form = InsertDiarioForm(initial={'firma':request.user})
+        form.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
+    else:
+        form = InsertDiarioForm(initial={'firma':request.user})
+        form.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
+    return render(request, 'regore/addDiario.html',{'form': form,'selezione': diarios,  })

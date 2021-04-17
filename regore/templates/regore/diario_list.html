@@ -1,0 +1,31 @@
+{% extends "prodiario/base.html" %} 
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link href="/static/style_diario_list.css" rel="stylesheet" type="text/css" media="screen" />	
+ 
+{% endblock %}
+{% block title %}<div class="title"><h3>Eventi progetto</h3></div>{% endblock %}
+{% block content %}
+
+<hr/>
+<hr/>
+<div class="title"><h3>{{progetto_01}}</h3></div>
+
+<table class="div-table">
+
+{% for diario in diarios %}
+<tr>
+	<th>{{diario.data}}</th>
+	<th>{{diario.tipo}}</th>
+	<th>{{diario.firma}}</th>
+</tr>
+<tr>	
+	<td colspan=3><p>{{diario.testo}}</p><p><a href={{diario.link}}>{{diario.link}}</a></p></td>
+</tr>
+{% endfor %} 
+
+</table>
+{% endblock content %}	
+{% block content2 %}
+{% endblock content2 %}

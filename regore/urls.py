@@ -7,4 +7,6 @@ urlpatterns = [
     path('reportOre/', views.reportOre, name='reportOre'),
     path('reportOreND/', views.reportOreND, name='reportOreND'),
     path('export_csv/', views.export_csv, name='export_csv'),
+    path('prodiario/', views.addDiario, name='diario'),
+    path('prodiarioList/', views.diario_list, name='diario-list'),
 ]

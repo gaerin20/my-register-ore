@@ -1,0 +1,32 @@
+{% extends "prodiario/base.html" %} 
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <link href="/static/style_diario_list.css" rel="stylesheet" type="text/css" media="screen" />	
+ <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+ <!-- il link al css ed i tre script che seguono servono sono necessari per il datepicker-->
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script> $(document).ready(function () {
+     	 $("#id-data").datepicker({ dateFormat: 'yy-mm-dd'}); });</script>
+	
+	
+{% endblock %}
+{% block title %}<div class="title"><h3>Cerca eventi progetto</h3></div>{% endblock %}
+{% block content %}
+<form action="{% url 'diario-list' %}" method="POST">
+<div id="insTable">{{form}}<input type="submit" value="Ok" /></div>
+
+
+<!--<h2>{{ user }}</h2>-->
+	{% if error %}
+	<p>{{ error }}</p>
+	{% endif %}
+
+<hr></hr>
+<hr></hr>
+
+{% endblock content %}	
+{% block content2 %}
+{% endblock content2 %}
