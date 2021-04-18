@@ -192,7 +192,7 @@ def addDiario(request):
         else:
             error = u'form is invalid'
             return errorHandle(error)
-        diarios=Diario.objects.latest('id')
+        diarios=Diario0.objects.latest('id')
         form = InsertDiarioForm(initial={'firma':request.user})
         form.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
     else:
