@@ -16,7 +16,7 @@
 {% block title %}<div class="title"><h3>Cerca eventi progetto</h3></div>{% endblock %}
 {% block content %}
 <form action="{% url 'diario-list' %}" method="POST">
-<div id="insTable">{{form}}<input type="submit" value="Ok" /></div>
+<div id="insTable">{{form.as_table}}<input type="submit" value="Ok" /></div>
 
 
 <!--<h2>{{ user }}</h2>-->

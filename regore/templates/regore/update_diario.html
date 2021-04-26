@@ -1,0 +1,12 @@
+{% extends "regore/base.html" %}
+
+{% block content %}
+<p>{{ verifica }}</p>
+<form action="" method="POST">
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Update" />
+
+<p><a href="{% url 'listing_diario' %}">Tutti gli eventi</a></p>
+{% endblock content %}

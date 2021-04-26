@@ -1,0 +1,10 @@
+{% extends "regore/base.html" %}
+
+{% block content %}
+<h1>Diario Listing</h1>
+<ul>
+{% for diario0 in diario %}
+	<li><a href="{% url 'update_diario' diario0.id %}">{{diario0.data}}</a></li>
+{% endfor %} 
+</ul>
+{% endblock content %}

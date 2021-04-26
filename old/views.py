@@ -9,6 +9,7 @@ from .formulari import *
 from django.views.decorators.csrf import csrf_exempt
 from django.forms import ModelForm
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext
 from django.template import Context, loader
@@ -27,7 +28,7 @@ def addOre(request):
         sz=Ore.objects.latest('data','ora_fine')
         def errorHandle(error):
                 form = InsertOreForm()
-                return render(None, 'regore/error.html',{
+                return render_to_response( 'regore/error.html',{
                  'error' : error,
                  'form' : form,
                 })
@@ -61,10 +62,10 @@ def reportOre(request):
         query="SELECT id, data, progetto_id, data, ora_inizio, ora_fine, (ora_fine - ora_inizio) as totale FROM regore_ore order by progetto_id, data"
         sz1 = Ore.objects.raw(query)
         def errorHandle(error):
-                return render(None, 'error.html',{
+                return render_to_response( 'error.html',{
 		'error' : error,
                 })
-        return render(request,'regore/reportOre2.html',{'selezione':sz1,  })
+        return render_to_response('regore/reportOre2.html',{'selezione':sz1,  })
 def export_csv(request):
         filename = "ore.csv"
         sz1 = Ore.objects.order_by('progetto_id', 'data')
@@ -98,7 +99,7 @@ def reportOreND(request):
         filename = "oreND.csv"
         def errorHandle(error):
                 form = ReportOreForm()
-                return render(None, 'error.html',{
+                return render_to_response( 'error.html',{
                 'error': error,
                 'form' : form,
                 })
@@ -132,38 +133,11 @@ def reportOreND(request):
                         obj1['note']=obj.note
                         #aggiungo il dizionario alla tupla che poi trasmetterò al template
                         sz_t.append(obj1)
-                return render(request,'regore/reportOreND_List.html',{'form':f,'selezione':sz_t,  })
+                return render_to_response('regore/reportOreND_List.html',{'form':f,'selezione':sz_t,  })
         else:
                 f = ReportOreForm()
                 f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
-                return render(request,'regore/reportOreND_Form.html',{'form':f,})
-@csrf_exempt
-def listing_ore(request):
-        data = {
-                "ore" : Ore.objects.all().order_by('-data'),
-        }
-        return render(request, "regore/listing_ore.html" , data)
-
-@csrf_exempt
-def update_ore(request, ore_id):
-        oupt=get_object_or_404(Ore, id=ore_id)
-        verifica=''
-        if (request.method == 'POST'):
-                form=InsertOreForm(request.POST,instance=oupt)
-                      
-                if form.is_valid():
-                        verifica=str(oupt)+" "+"corretto!"
-                        form.save()
-                        
-                       
-                        
-                else:
-                    error = u'form is invalid'
-                    return errorHandle(error)
-        else:
-                form=InsertOreForm(instance=oupt)
-               
-        return render(request, 'regore/update_ore.html' , {'form': form,'verifica':verifica})
+                return render_to_response('regore/reportOreND_Form.html',{'form':f,})
 
 #diario
 @csrf_exempt
@@ -171,13 +145,12 @@ def diario_list(request):
     diarios=Diario0.objects.latest('id')
     def errorHandle(error):
         f = CercaDiarioForm2()
-        return render(None, 'regore/error.html',{
+        return render_to_response( 'regore/error.html',{
          'error' : error,
          'form' : f,
         })
     if (request.method == 'POST'):
         f=CercaDiarioForm2(request.POST)
-        f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
         if f.is_valid():
             post = request.POST
             progetto_selezionato = f.cleaned_data['progetto']
@@ -187,14 +160,14 @@ def diario_list(request):
             sz= Diario0.objects.filter(progetto = progetto_selezionato).order_by('data')
             progetto=sz[0].progetto
             if tipo:
-                sz= Diario0.objects.filter(progetto = progetto_selezionato,tipo = tipo).order_by('data')
+                sz= Diario.objects.filter(progetto = progetto_selezionato,tipo = tipo).order_by('data')
             
             f = CercaDiarioForm2()
-            f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')       
+                   
                
             return render(request, 'regore/diario_list.html', {'diarios': sz, 'progetto':progetto})
     f = CercaDiarioForm2()
-    f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
+    
     return render(request, 'regore/diario_search.html', {'form':f,})
 
 @csrf_exempt
@@ -202,7 +175,7 @@ def addDiario(request):
     diarios=Diario0.objects.latest('id')
     def errorHandle(error):
         form = InsertDiarioForm()
-        return render(None, 'regore/error.html',{
+        return render_to_response( 'regore/error.html',{
          'error' : error,
          'form' : form,
         })
@@ -215,7 +188,7 @@ def addDiario(request):
             form.cleaned_data['link']
             form.cleaned_data['tipo']
             form.cleaned_data['firma']
-            new_diario0=form.save()
+            new_diario=form.save()
         else:
             error = u'form is invalid'
             return errorHandle(error)
@@ -226,41 +199,3 @@ def addDiario(request):
         form = InsertDiarioForm(initial={'firma':request.user})
         form.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
     return render(request, 'regore/addDiario.html',{'form': form,'selezione': diarios,  })
-
-
-@csrf_exempt
-def listing_diario(request):
-        data = {
-                "diario" : Diario0.objects.all().order_by('-data'),
-        }
-        return render(request, "regore/listing_diario.html" , data)
-
-@csrf_exempt
-def view_diario(request, diario0_id):
-        diario0 = get_object_or_404(Diario0, id=diario0_id)
-        data = {
-                "diario":diario0,
-        }
-        return render(request, "regore/view_diario.html" , data)
-
-@csrf_exempt
-def update_diario(request, diario0_id):
-        dupt=get_object_or_404(Diario0, id=diario0_id)
-        verifica=''
-        if (request.method == 'POST'):
-                form=InsertDiarioForm(request.POST,instance=dupt)
-                      
-                if form.is_valid():
-                        verifica=str(dupt)+" "+"corretto!"
-                        form.save()
-                        
-                       
-                        
-                else:
-                    error = u'form is invalid'
-                    return errorHandle(error)
-        else:
-                form=InsertDiarioForm(instance=dupt)
-               
-        return render(request, 'regore/update_diario.html' , {'form': form,'verifica':verifica})
-

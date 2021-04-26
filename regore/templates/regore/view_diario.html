@@ -1,0 +1,12 @@
+{% extends "regore/base.html" %}
+
+{% block content %}
+<h1>{{diario.progetto}}</h1>
+<p>{{ diario.data }}</p>
+<p>{{ diario.testo }}</p>
+<p>{{ diario.link }}</p>
+<p>{{ diario.firma }}</p>
+<hr/>
+
+<a href="{% url 'listing_diario' %}">Tutti gli eventi</a>
+{% endblock content %}

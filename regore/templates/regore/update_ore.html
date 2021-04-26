@@ -1,0 +1,12 @@
+{% extends "regore/base.html" %}
+
+{% block content %}
+<p>{{ verifica }}</p>
+<form action="" method="POST">
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Salva correzione" />
+
+<p><a href="{% url 'listing_ore' %}">Tutte le ore</a></p>
+{% endblock content %}

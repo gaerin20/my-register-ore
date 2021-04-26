@@ -1,0 +1,10 @@
+{% extends "regore/base.html" %}
+
+{% block content %}
+<h1>Ore Listing</h1>
+<ul>
+{% for ore in ore %}
+	<li><a href="{% url 'update_ore' ore.id %}">{{ore.data}}</a></li>
+{% endfor %} 
+</ul>
+{% endblock content %}
