@@ -10,7 +10,9 @@
 {% endblock %}
 {% block title %}REPORT {{user.nome_cognome}} {% endblock %}
 {% block content %}
-
+<p>progetto:{{progetto_id}}</p>
+<p>firma:{{firma}}</p>
+<p>data:{{data_da}}</p>
 <table>
 {% for ore in selezione %}
     {% ifchanged ore.data %}
@@ -36,7 +38,7 @@
 {% endfor %}
 
 </table>
-<a href="{% url 'export_csv' %}">Download CSV</a>
+<a href="{% url 'export_csv3' progetto_id data_da %}">Download CSV</a>
 <h2>{{ user }}</h2>
 {% endblock content %}
 {% block content2 %}

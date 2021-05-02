@@ -90,6 +90,60 @@ def export_csv(request):
                        
                 ])
         return response
+def export_csv2(request, progetto_id,):
+        filename = "ore.csv"
+        #data_da = request.data_da
+        #sz1 = Ore.objects.filter(progetto_id = progetto_id, data__gte = data_da ).order_by('data')
+        sz1 = Ore.objects.filter(progetto_id = progetto_id).order_by('data')
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition']='attachment; filename='+filename
+        writer = csv.writer(response)
+        response.write(u'\ufeff'.encode('utf8'))
+        writer.writerow([
+                smart_str(u"ID"),
+                smart_str(u"progetto_id"),
+                smart_str(u"data"),
+                smart_str(u"ora_inizio"),
+                smart_str(u"ora_fine"),
+                
+        ])
+        for obj in sz1:
+                writer.writerow([
+                        smart_str(obj.id),
+                        smart_str(obj.progetto),
+                        smart_str(obj.data),
+                        smart_str(obj.ora_inizio),
+                        smart_str(obj.ora_fine),
+                       
+                ])
+        return response
+def export_csv3(request, progetto_id, data_da):
+        filename = "ore.csv"
+        #data_da=request.data
+        sz1 = Ore.objects.filter(progetto_id = progetto_id, data__gte = data_da ).order_by('data')
+        #sz1 = Ore.objects.filter(progetto_id = progetto_id).order_by('data')
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition']='attachment; filename='+filename
+        writer = csv.writer(response)
+        response.write(u'\ufeff'.encode('utf8'))
+        writer.writerow([
+                smart_str(u"ID"),
+                smart_str(u"progetto_id"),
+                smart_str(u"data"),
+                smart_str(u"ora_inizio"),
+                smart_str(u"ora_fine"),
+                
+        ])
+        for obj in sz1:
+                writer.writerow([
+                        smart_str(obj.id),
+                        smart_str(obj.progetto),
+                        smart_str(obj.data),
+                        smart_str(obj.ora_inizio),
+                        smart_str(obj.ora_fine),
+                       
+                ])
+        return response
 @csrf_exempt
 def testData(request):
         return render(request, 'regore/testData.html',{})
@@ -132,7 +186,8 @@ def reportOreND(request):
                         obj1['note']=obj.note
                         #aggiungo il dizionario alla tupla che poi trasmetterò al template
                         sz_t.append(obj1)
-                return render(request,'regore/reportOreND_List.html',{'form':f,'selezione':sz_t,  })
+                #response=export_csv2
+                return render(request,'regore/reportOreND_List.html',{'form':f,'selezione':sz_t, 'progetto_id':progetto_selezionato,'firma':current_collaboratore,'data_da':data_da})
         else:
                 f = ReportOreForm()
                 f.fields['progetto'].queryset = Progetto.objects.filter(archivio=False, privato=False).order_by('-anno')
@@ -142,6 +197,7 @@ def listing_ore(request):
         data = {
                 "ore" : Ore.objects.all().order_by('-data'),
         }
+        
         return render(request, "regore/listing_ore.html" , data)
 
 @csrf_exempt
